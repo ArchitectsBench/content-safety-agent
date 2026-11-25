@@ -7,3 +7,4 @@ __pycache__/
 !.env.template
 .DS_Store
 .streamlit/secrets.toml
+.pytest_cache/

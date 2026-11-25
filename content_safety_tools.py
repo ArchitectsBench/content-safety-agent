@@ -1,7 +1,7 @@
 """
 Content Safety tool implementations for the content_safety_ner_analyst agent.
 
-All three functions return JSON strings so the agent can parse them directly.
+All four functions return JSON strings so the agent can parse them directly.
 Auth uses DefaultAzureCredential — no API keys needed.
 """
 

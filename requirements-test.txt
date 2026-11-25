@@ -1,0 +1,6 @@
+# What the offline tests need: the tool module's imports plus pytest.
+azure-ai-contentsafety>=1.0.0
+azure-identity>=1.19.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+pytest>=8.0

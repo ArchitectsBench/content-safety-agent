@@ -59,6 +59,7 @@ Seeing all three in one UI is the point of the project: a clean tool score is no
 | `app.py` | Dashboard-style Streamlit UI showing the detail of every tool call |
 | `run_agent.py` | Command-line harness that runs four scenarios end to end: safe, harmful, ungrounded, protected material |
 | `test_prompts.md` | Inputs to try, grouped by the check they exercise, with expected outcomes |
+| `tests/` | Offline tests for the four tools: 20 cases that run without Azure access |
 | `.env.template` | The three settings to fill in |
 
 ## Run it
@@ -99,6 +100,17 @@ Or run the scripted scenarios without a UI:
 python run_agent.py
 ```
 
+## Test it offline
+
+The tests replace the SDK client, the HTTP calls and the credential with fakes, so they need no Azure account, read no `.env` file and cost nothing.
+
+```bash
+pip install -r requirements-test.txt
+python -m pytest tests
+```
+
+They cover what each tool does with a service reply: the verdict it writes, the request it sends, the severity threshold, and that a failed call comes back as an `ERROR` verdict, never a silent pass. They run on every push.
+
 ## Design notes
 
 - **No keys.** Every call authenticates with `DefaultAzureCredential`, so local runs use your `az login` session and a hosted copy can use a managed identity without code changes.
@@ -110,6 +122,6 @@ python run_agent.py
 ## Limits
 
 - Two of the calls use preview API versions (groundedness, and protected-material detection for code). Preview APIs can change or be withdrawn.
-- There is no automated test suite; `run_agent.py` is a scripted demonstration against live services.
+- The automated tests cover the tool logic only, against faked service replies. The agent, the instructions and the two UIs are exercised only by `run_agent.py`, a scripted demonstration against live services.
 - The agent's name contains "ner" for historical reasons. The project does no entity recognition.
 - Running it calls billed Azure services.
