@@ -1,5 +1,7 @@
 # Content Safety Agent
 
+[![Tests](https://github.com/ArchitectsBench/content-safety-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/ArchitectsBench/content-safety-agent/actions/workflows/tests.yml)
+
 An Azure AI Foundry agent that screens every message with four Azure AI Content Safety checks before it answers, and shows the verdict of each check beside the reply.
 
 It is a proof of concept for one question: what does each safety layer actually catch, and where does it stay silent?
